@@ -1,0 +1,138 @@
+.row-header{
+    margin:0px auto;
+    padding:0px auto;
+}
+
+.row-content{
+    margin:0px auto;
+    padding: 50px 0px 50px 0px;
+    border-bottom:1px ridge;
+    min-height:400px;
+}
+
+.row-footer{
+    background-color: #cce7ff;
+    margin:0px auto;
+    padding:20px 0px 20px 0px;
+}
+
+.jumbotron{
+    padding:60px 30px 55px 30px;
+    margin:0px auto;
+    background: #cce7ff;
+    color:black;
+}
+
+address{
+    font-size:80%;
+    margin: 0px;
+    color:#0f0f0f;
+}
+
+body{
+    padding-top: 150px;
+    z-index: 0;
+}
+
+.navbar-dark{
+    color: gold;
+    background: black;
+}
+
+.navbar-dark .navbar-nav > .active > a,
+.navbar-dark .navbar-nav > .active > a:hover,
+.navbar-dark .navbar-nav > .active > a:focus{
+    color: gold;
+    background: white;
+}
+
+.navbar-dark .navbar-nav > .open > a,
+.navbar-dark .navbar-nav > .open > a:hover,
+.navbar-dark .navbar-nav > .open > a:focus{
+    color: white;
+    background: black;
+}
+
+.navbar-dark .navbar-nav .open .dropdown-menu >li > a,
+.navbar-dark .navbar-nav .open .dropdown-menu {
+    background-color: black;
+    color: gold;
+}
+
+.navbar-dark .navbar-nav .open .dropdown-menu > li > a:hover{
+    color: #000000;
+}
+
+.tab-content {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+}
+
+.navTabColor{
+    color:goldenrod;
+}
+
+@media (min-width: 768px) {
+    .navbar-nav.navbar-center {
+        position: absolute;
+        left: 50%;
+        transform: translatex(-50%);
+        padding: 8px;
+    }
+}
+
+.rowBackground{
+    background-color:black;
+}
+
+.pic {
+    display: block;
+    margin: auto;
+    width: 100%;
+}
+
+
+.carousel-inner{
+    width:100%;
+    max-height: 600px !important;
+    margin: auto;
+}
+
+.middle{
+   text-align:center;
+}
+
+.radio{
+        display:inline-block;
+        margin: 0 20px 0 20px;
+}
+
+table.bookDetails{
+    table-layout:fixed;
+    width:200px;
+}
+
+table.bookDetails td.bookDetails{
+    width:50px;
+}
+
+hr{
+    border-color:black;
+}
+
+.carousel-inner > .item > img {
+    margin: 0 auto;
+}
+
+.glyphicon-large {
+    font-size: 100px;
+}
+.reasons-why {
+    text-align: center;
+}
+.reasons-why p {
+    margin-bottom: 30px;
+    font-family: sans-serif;
+}

@@ -19,9 +19,12 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/mystyles.css') }}" rel="stylesheet">
 </head>
 <body>
+
     <div id="app">
+        @include('inc.navbar')
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
