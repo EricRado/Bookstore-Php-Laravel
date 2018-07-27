@@ -3,7 +3,7 @@
             <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
             data-target="#navbarTop" aria-controls="navbar" aria-expanded="false"> <span class="sr-only">Toggle Navigation</span>
     &#x2630;</button> <a class="navbar-brand"
-            href="#"><img src="{% static &apos;img/homelogo.png&apos; %}" class="result" height="80" width="300"></a>
+            href="#"><img src="{{ asset('img/homelogo.png')}}" class="result" height="80" width="300"></a>
             <div class="navbar-collapse collapse" id="navbarTop">
                 <ul class="nav navbar-nav navbar-center">
                     <li class="nav-item">
@@ -91,11 +91,16 @@
                     <a style="color: white" href="{% url &apos;about&apos; %}" class="nav-link">About</a>
                 </li>
             </ul>
+            
+            <!-- Right Side of navigation bar -->
+
             <ul class="nav navbar-nav ml-auto">
                
                 @if(!Auth::guest())
-                    <li class="nav-item"> <a style="color: white" href="{% url &apos;accounts:logout&apos; %}" class="nav-link">Logout</a>
-                    </li>@else
+                    <li class="nav-item"> 
+                        <a style="color: white" href="{% url &apos;accounts:logout&apos; %}" class="nav-link">Logout</a>
+                    </li>
+                @else
                     <li class="nav-item">
                         <!-- Login id target --> <a style="color: white" href="#" class="nav-link" data-toggle="modal"
                         data-target="#modalSignIn">Sign In</a>
