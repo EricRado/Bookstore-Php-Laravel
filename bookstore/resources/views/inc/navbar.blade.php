@@ -40,7 +40,7 @@
                 
                 <!-- Link to Home page -->
                 <li class="nav-item"> 
-                    <a style="color: white" class="navTabColor nav-link" href="{% url &apos;index&apos; %}">Home 
+                    <a style="color: white" class="navTabColor nav-link" href="/">Home 
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
