@@ -88,7 +88,7 @@
                 
                 <!-- Link to About page -->
                 <li class="nav-item">
-                    <a style="color: white" href="{% url &apos;about&apos; %}" class="nav-link">About</a>
+                    <a style="color: white" href="/about" class="nav-link">About</a>
                 </li>
             </ul>
             
