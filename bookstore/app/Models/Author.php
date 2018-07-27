@@ -15,7 +15,7 @@ class Author extends Model
     // Don't allow timestamps
     public $timestamps = false;
 
-    public function Book() {
-        
+    public function books() {
+        return $this->hasMany('App\Models\Book');
     }
 }
