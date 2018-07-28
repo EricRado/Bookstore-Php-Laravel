@@ -102,8 +102,9 @@
                     </li>
                 @else
                     <li class="nav-item">
-                        <!-- Login id target --> <a style="color: white" href="#" class="nav-link" data-toggle="modal"
-                        data-target="#modalSignIn">Sign In</a>
+                        <!-- Login id target --> 
+                        <a style="color: white" href="{{route('login')}}" class="nav-link" 
+                        >Login</a>
                     </li>
                 @endif 
                 
@@ -135,7 +136,7 @@
                 
                 @else
                 <li class="nav-item"> 
-                    <a style="color: white" href="{% url &apos;accounts:signup&apos; %}" class="nav-link">Sign Up</a>
+                    <a style="color: white" href="{{route('register')}}" class="nav-link">Register</a>
                 </li>
                 
                 @endif
