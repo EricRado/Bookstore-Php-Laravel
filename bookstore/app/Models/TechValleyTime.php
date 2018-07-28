@@ -4,18 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Author extends Model
+class TechValleyTime extends Model
 {
     // Table name
-    protected $table = 'authors';
-    
+    protected $table = 'tech_valley_time';
+
     // Primary key
     public $primaryKey = 'id';
 
     // Don't allow timestamps
     public $timestamps = false;
 
-    public function books() {
-        return $this->hasMany('App\Models\Book');
+    public function book() {
+        return $this->hasOne('App\Models\Book');
     }
 }

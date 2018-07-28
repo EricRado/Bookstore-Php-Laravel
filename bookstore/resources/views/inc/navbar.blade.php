@@ -69,19 +69,19 @@
                             <a href="{% url &apos;products:topRatedBooks&apos; %}">Top Rated Books</a>
                         </li>
                         <li class="dropdown-item">
-                            <a href="{% url &apos;products:bookGenre&apos; &apos;scifi&apos; %}">Science Fiction</a>
+                            <a href="/books/genre/scifi">Science Fiction</a>
                         </li>
                         <li class="dropdown-item">
-                            <a href="{% url &apos;products:bookGenre&apos; &apos;gaming&apos; %}">Gaming</a>
+                            <a href="/books/genre/gaming">Gaming</a>
                         </li>
                         <li class="dropdown-item">
-                            <a href="{% url &apos;products:bookGenre&apos; &apos;iot&apos; %}">Internet of Things</a>
+                            <a href="/books/genre/iot">Internet of Things</a>
                         </li>
                         <li class="dropdown-item">
-                            <a href="{% url &apos;products:bookGenre&apos; &apos;history&apos; %}">History</a>
+                            <a href="/books/genre/history">History</a>
                         </li>
                         <li class="dropdown-item">
-                            <a href="{% url &apos;products:bookGenre&apos; &apos;social&apos; %}">Social</a>
+                            <a href="/books/genre/social">Social</a>
                         </li>
                     </ul>
                 </li>
