@@ -23,7 +23,7 @@
                 <ul class="nav navbar-nav ml-auto">
                     @if (!Auth::guest())
                         <li class="nav-item">
-                            <a style="color: white" class="nav-link" href="#">Hello {{ user.nickname }}</a>
+                            <a style="color: white" class="nav-link" href="#">Hello {{ Auth::user()->username }}</a>
                         </li>
                     @endif
                     <li class="nav-item"><a style="color: white" class="nav-link" href="{% url &apos;payments:shoppingCart&apos; %}">
@@ -98,13 +98,18 @@
                
                 @if(!Auth::guest())
                     <li class="nav-item"> 
-                        <a style="color: white" href="{% url &apos;accounts:logout&apos; %}" class="nav-link">Logout</a>
+                        <a style="color: white" href="{{route('logout')}}" class="nav-link" onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">Logout</a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                        </form>
+
                     </li>
                 @else
                     <li class="nav-item">
                         <!-- Login id target --> 
-                        <a style="color: white" href="{{route('login')}}" class="nav-link" 
-                        >Login</a>
+                        <a style="color: white" href="{{route('login')}}" class="nav-link" >Login</a>
                     </li>
                 @endif 
                 
