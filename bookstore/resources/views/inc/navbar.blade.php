@@ -109,7 +109,8 @@
                 @else
                     <li class="nav-item">
                         <!-- Login id target --> 
-                        <a style="color: white" href="{{route('login')}}" class="nav-link" >Login</a>
+                        <a style="color: white" href="#" class="nav-link"
+                         data-toggle="modal" data-target="#modalSignIn" >Login</a>
                     </li>
                 @endif 
                 
@@ -149,3 +150,14 @@
         </div>  
     </div>
 </nav>
+
+
+ <!-- Sign In Modal -->
+ <div class="modal fade" id="modalSignIn" role="dialog">
+    <div class="modal-dialog">
+        <!-- Sign In Modal Content -->
+        <div class="modal-content">
+            @include('auth.login')
+        </div>
+    </div>
+ </div>
