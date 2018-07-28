@@ -14,7 +14,7 @@
             </div>
 
             <div class="col-12 col-md-5 order-sm-2">
-                <a href="{% url 'products:bookDetail' book.title %}" style="color:gray;"><h4>{{ $book->title }} </h4></a>
+                <a href="/books/details/{{$book->title}}" style="color:gray;"><h4>{{ $book->title }} </h4></a>
                 <p style="color:gray"> by {{ $book->author->first_name }} {{ $book->author->last_name }} </p>
                 <p>
                 

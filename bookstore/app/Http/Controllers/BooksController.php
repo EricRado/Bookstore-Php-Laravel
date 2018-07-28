@@ -13,4 +13,10 @@ class BooksController extends Controller
         $books = Book::where('genre', '=', $genre)->paginate(15);
         return view('books.bookResults')->with('books', $books);
     }
+
+    public function getBookDetailsByTitle($title) {
+        $book = Book::where('title', $title)->first();
+
+        return view('books.bookDetails')->with('book', $book);
+    }
 }

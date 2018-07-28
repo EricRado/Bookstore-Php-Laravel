@@ -20,3 +20,5 @@ Auth::routes();
 Route::get('/dashboard', 'DashboardController@index');
 
 Route::get('/books/genre/{genre}','BooksController@getBooksByGenre');
+
+Route::get('/books/details/{title}', 'BooksController@getBookDetailsByTitle');
