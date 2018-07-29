@@ -54,7 +54,7 @@
                 
                 <!-- Link to Best Sellers -->
                 <li class="nav-item">
-                    <a style="color: white" href="{% url &apos;products:topSellingBooks&apos; %}"
+                    <a style="color: white" href="/books/bestSellers"
                         class="nav-link">Best Sellers
                     </a>
                 </li>
@@ -66,7 +66,7 @@
                         </a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-item">
-                            <a href="{% url &apos;products:topRatedBooks&apos; %}">Top Rated Books</a>
+                            <a href="/books/topRated">Top Rated Books</a>
                         </li>
                         <li class="dropdown-item">
                             <a href="/books/genre/scifi">Science Fiction</a>

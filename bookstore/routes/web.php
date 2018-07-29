@@ -19,6 +19,10 @@ Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index');
 
+Route::get('/books/topRated', 'BooksController@getTopRatedBooks');
+
+Route::get('/books/bestSellers', 'BooksController@getBestSellersBooks');
+
 Route::get('/books/genre/{genre}','BooksController@getBooksByGenre');
 
 Route::get('/books/details/{title}', 'BooksController@getBookDetailsByTitle');
