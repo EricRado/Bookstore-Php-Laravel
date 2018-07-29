@@ -21,7 +21,7 @@ class CreditCard extends Model
      * @var array
      */
     protected $fillable = [
-        'name_on_card', 'cc_number', 'security_code', 'expiration_date',
+        'name_on_card', 'cc_number', 'security_code', 'expiration_date', 'provider',
     ];
 
     public function user() {

@@ -132,7 +132,7 @@
                             <a href="/creditCards/{{ Auth::user()->id }}">Manage Payment Method</a>
                         </li>
                         <li class="dropdown-item">
-                            <a href="{% url &apos;accounts:displayAddress&apos; %}">Manage Shipping Address</a>
+                            <a href="/addresses/{{ Auth::user()->id}}">Manage Shipping Address</a>
                         </li>
                         <li class="dropdown-item">
                             <a href="{% url &apos;payments:orderHistory&apos; %}">Purchase History</a>
