@@ -33,4 +33,8 @@ class User extends Authenticatable
     public function address() {
         return $this->hasMany('App\Models\Address');
     }
+
+    public function creditCard() {
+        return $this->hasMany('App\Models\CreditCard');
+    }
 }

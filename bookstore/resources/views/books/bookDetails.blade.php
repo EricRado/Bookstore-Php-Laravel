@@ -27,8 +27,9 @@
                 <h3>Paperback</h3>
                 <h3>${{ $book->price }}</h3>
                 <p style="padding:5px;"></p>
-                <!--{% include 'payments/quantityForm.html' %} -->
-    
+                
+                <!-- Include book quantity form to add to shopping cart -->
+                @include('payments.quantityForm')
             </div>
         </div>
         <hr>
@@ -77,6 +78,12 @@
                 <p>{{ $book->author->bio }}</p>
                 <p style="padding:10px"></p>
                 
+                <!-- If author has more than one book in the store create link to display all books by the author -->
+                @if (count($books_by_author) > 1)
+                <a href="/books/byAuthor/$book->author->id" style="color:gray;">More Books by
+                        {{ $book->author->first_name }} {{ $book->author->last_name }}</a>
+                @endif
+
             </div>
         </div>
         <hr>

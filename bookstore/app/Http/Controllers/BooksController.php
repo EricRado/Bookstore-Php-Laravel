@@ -16,7 +16,8 @@ class BooksController extends Controller
 
     public function getBookDetailsByTitle($title) {
         $book = Book::where('title', $title)->first();
-        return view('books.bookDetails')->with('book', $book);
+        $books_by_author = Book::where('author_id',$book->author->id)->get();
+        return view('books.bookDetails')->with(['book'=>$book, 'books_by_author'=>$books_by_author]);
     }
 
     public function getTopRatedBooks() {
