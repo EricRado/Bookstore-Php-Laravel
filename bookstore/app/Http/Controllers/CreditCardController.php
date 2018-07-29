@@ -96,7 +96,24 @@ class CreditCardController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name_on_card' => 'required|string',
+            'cc_number' => 'required|string|max:16',
+            'security_code' => 'required|string|max:3',
+            'expiration_date' => 'required|date',
+            'provider' => 'required'
+        ]);
+
+        // Update Credit Card
+        $creditCard = CreditCard::find($id);
+        $creditCard->name_on_card = $request->input('name_on_card');
+        $creditCard->cc_number = $request->input('cc_number');
+        $creditCard->security_code = $request->input('security_code');
+        $creditCard->expiration_date = $request->input('expiration_date');
+        $creditCard->provider = $request->input('provider');
+        $creditCard->save();
+
+        return redirect('/creditCards/' . auth()->user()->id);
     }
 
     /**
