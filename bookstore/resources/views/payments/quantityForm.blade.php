@@ -1,4 +1,4 @@
-{!! Form::open(['action' => ['ShoppingCartController@updateBookQuantity', $book->id]]) !!}
+{!! Form::open(['action' => ['ShoppingCartController@updateBookQuantityInShoppingCart', $book->id]]) !!}
 
     <div class="form-group">
         {{ Form::label('quantityValue','Quantity')}}

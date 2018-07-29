@@ -30,3 +30,5 @@ Route::get('/books/details/{title}', 'BooksController@getBookDetailsByTitle');
 Route::resource('creditCards', 'CreditCardController');
 
 Route::resource('addresses', 'AddressController');
+
+Route::post('/shoppingCart/add/{id}', 'ShoppingCartController@updateBookQuantityInShoppingCart');
