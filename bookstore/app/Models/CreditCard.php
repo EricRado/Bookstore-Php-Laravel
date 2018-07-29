@@ -15,6 +15,15 @@ class CreditCard extends Model
     // Don't allow timestamps
     public $timestamps = false;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name_on_card', 'cc_number', 'security_code', 'expiration_date',
+    ];
+
     public function user() {
         return $this->belongsTo('App\Models\User');
     }

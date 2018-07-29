@@ -129,7 +129,7 @@
                             <a href="{% url &apos;accounts:changePassword&apos; %}">Change Password</a>
                         </li>
                         <li class="dropdown-item">
-                            <a href="{% url &apos;payments:displayCC&apos; %}">Manage Payment Method</a>
+                            <a href="/creditCards/{{ Auth::user()->id }}">Manage Payment Method</a>
                         </li>
                         <li class="dropdown-item">
                             <a href="{% url &apos;accounts:displayAddress&apos; %}">Manage Shipping Address</a>
