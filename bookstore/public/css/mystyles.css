@@ -36,13 +36,23 @@ body{
 
 .navbar-dark{
     color: gold;
-    background: black;
+    background: gray;
 }
+.navbar-dark .nav-top {
+    display: inline-block;
+   
+}
+
+navbar-fixed-top {
+    position:fixed !important;
+}
+
+/***********FIX NAVBAR COLORS**************/
 
 .navbar-dark .navbar-nav > .active > a,
 .navbar-dark .navbar-nav > .active > a:hover,
 .navbar-dark .navbar-nav > .active > a:focus{
-    color: gold;
+    color: aliceblue;
     background: white;
 }
 
@@ -55,12 +65,12 @@ body{
 
 .navbar-dark .navbar-nav .open .dropdown-menu >li > a,
 .navbar-dark .navbar-nav .open .dropdown-menu {
-    background-color: black;
-    color: gold;
+    background-color: gray;
+    color: aliceblue;
 }
 
 .navbar-dark .navbar-nav .open .dropdown-menu > li > a:hover{
-    color: #000000;
+    color:gray;
 }
 
 .tab-content {
