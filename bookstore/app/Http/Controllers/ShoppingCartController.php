@@ -11,6 +11,7 @@ class ShoppingCartController extends Controller
     }
 
     public function viewShoppingCart() {
+        
         return view('payments.showShoppingCart');
     }
 }
