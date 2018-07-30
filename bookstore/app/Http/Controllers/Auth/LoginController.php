@@ -47,7 +47,7 @@ class LoginController extends Controller
             
             // Fetch the latest shopping cart 
             $order = Order::where('user_id', '=', auth()->user()->id)->where('payed_order', '=', 0)->get()->first();
-            Session::put('order_id', $order->id);
+            Session::put('orderId', $order->id);
             
             return redirect('/'); 
         } else{
