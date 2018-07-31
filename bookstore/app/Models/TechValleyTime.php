@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class TechValleyTime extends Model
 {
     // Table name
-    protected $table = 'tech_valley_time';
+    protected $table = 'tech_valley_times';
 
     // Primary key
     public $primaryKey = 'id';
@@ -16,6 +16,6 @@ class TechValleyTime extends Model
     public $timestamps = false;
 
     public function book() {
-        return $this->hasOne('App\Models\Book');
+        return $this->belongsTo('App\Models\Book');
     }
 }

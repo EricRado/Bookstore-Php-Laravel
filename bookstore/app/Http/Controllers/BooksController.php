@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Author;
 use App\Models\Book;
+use App\Models\TechValleyTime;
 
 class BooksController extends Controller
 {
@@ -20,6 +21,10 @@ class BooksController extends Controller
         return view('books.bookDetails')->with(['book'=>$book, 'books_by_author'=>$books_by_author]);
     }
 
+    public function getBooksByAuthor() {
+
+    }
+
     public function getTopRatedBooks() {
         $books = Book::orderBy('rating', 'desc')->take(25)->get();
         return view('books.bookResults')->with('books', $books);
@@ -29,4 +34,14 @@ class BooksController extends Controller
         $books = Book::orderBy('amount_sold', 'desc')->take(25)->get();
         return view('books.bookResults')->with('books', $books);
     }
+
+    public function getBookByTitle() {
+        
+    }
+
+    public function getTechValleyTimes() {
+        $tech_valley_times = TechValleyTime::all();
+        return view('books.techValleyTimesResults')->with('tech_valley_times', $tech_valley_times);
+    }
+
 }

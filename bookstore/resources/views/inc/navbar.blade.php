@@ -42,7 +42,7 @@
                 
                 <!-- Link to Tech Valley Times Books -->
                 <li class="nav-item">
-                    <a style="color: white" href="{% url &apos;products:techValleyTimes&apos; %}"
+                    <a style="color: white" href="/books/techValleyTimes"
                         class="nav-link">Tech Valley Times
                     </a>
                 </li>

@@ -27,6 +27,8 @@ Route::get('/books/genre/{genre}','BooksController@getBooksByGenre');
 
 Route::get('/books/details/{title}', 'BooksController@getBookDetailsByTitle');
 
+Route::get('/books/techValleyTimes', 'BooksController@getTechValleyTimes');
+
 Route::resource('creditCards', 'CreditCardController');
 
 Route::resource('addresses', 'AddressController');

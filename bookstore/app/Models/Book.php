@@ -22,4 +22,8 @@ class Book extends Model
     public function orderItem() {
         return $this->hasMany('App\Models\User');
     }
+
+    public function techValleyTime() {
+        return $hasOne('App\Models\TechValleyTime');
+    }
 }
