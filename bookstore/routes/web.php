@@ -34,3 +34,10 @@ Route::resource('addresses', 'AddressController');
 Route::post('/shoppingCart/add', 'ShoppingCartController@addBookToShoppingCart');
 
 Route::get('/shoppingCart/show', 'ShoppingCartController@viewShoppingCart');
+
+// NEEDS TO BE POST
+Route::get('/shoppingCart/orderSubmitted', 'ShoppingCartController@submitOrder');
+
+Route::get('/shoppingCart/orderHistory', 'ShoppingCartController@viewPurchasedOrdersHistory');
+
+Route::get('/shoppingCart/orderHistory/{orderId}', 'ShoppingCartController@viewPurchasedOrderItems');

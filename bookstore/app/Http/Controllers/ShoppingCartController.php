@@ -7,6 +7,7 @@ use App\Models\OrderItem;
 use App\Models\Order;
 use App\Models\Book;
 use Session;
+use Carbon\Carbon;
 
 class ShoppingCartController extends Controller
 {
@@ -17,8 +18,33 @@ class ShoppingCartController extends Controller
 
         // get all book items in current active shopping cart
         $order_items = OrderItem::where('order_id', '=', $orderId)->get();
+
+        // get order/shopping cart details
+        $order = Order::find($orderId);
         
-        return view('payments.showShoppingCart')->with('order_items', $order_items);
+        return view('payments.showShoppingCart')->with([
+            'order_items' => $order_items,
+            'order' => $order
+        ]);
+    }
+
+    public function viewPurchasedOrdersHistory() {
+        $userId = auth()->user()->id;
+
+        // get all orders that were purchased
+        $payed_orders = Order::where('user_id', '=', $userId)->where('payed_order', '=', true)->get();
+
+        return view('payments.showOrderHistory')->with('payed_orders', $payed_orders);
+    }
+
+    public function viewPurchasedOrderItems($orderId) {
+        // get books purchased from selected order
+        $purchased_items = OrderItem::where('order_id', '=' , $orderId)->get();
+
+        return view('payments.showPurchasedItems')->with([
+            'purchased_items' => $purchased_items,
+            'order_id' => $orderId
+        ]);
     }
 
     public function addBookToShoppingCart(Request $request) {
@@ -48,6 +74,19 @@ class ShoppingCartController extends Controller
         
         // update order price, tax price , and total price
         $this->updateCartPrice($orderId, $bookQuantityAddedPrice);
+
+        return redirect()->back();
+    }
+
+    public function submitOrder() {
+        $orderId = Session::get('orderId');
+        $datetime = Carbon::now();
+
+        // update payed_order field to true
+        $order = Order::find($orderId);
+        $order->payed_order = true;
+        $order->datetime_ordered = Carbon::now();
+        $order->save();
 
         return redirect()->back();
     }

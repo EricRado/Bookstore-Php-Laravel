@@ -63,6 +63,31 @@
             @endforeach
         </div>
     </div>
+
+    <!-- display the total price of the order -->
+    <div class="col-4 col-md-3 order-sm-2">
+            <table style="table-layout:fixed; width:390px;">
+                <tr>
+                    <td class="fieldSizeFont">Order Subtotal</td>
+                    <td class="fieldSizeFont">${{ $order->price }}</td>
+
+                </tr>
+                <tr>
+                    <td class="fieldSizeFont">Taxes</td>
+                    <td class="fieldSizeFont">${{ $order->tax_price }}</td>
+                </tr>
+
+            </table>
+            <hr>
+            <table style="table-layout:fixed; width:390px;">
+                <tr>
+                    <td class="fieldSizeFont">Total Price</td>
+                    <td class="fieldSizeFont">${{ $order->total_price }}</td>
+                </tr>
+            </table>
+            <p style="padding:5px"></p>
+        <a class="btn btn-lg btn-primary" href="/shoppingCart/orderSubmitted">Purchase Order</a>
+    </div>
             
 @else
 <h2>Shopping Cart is Empty</h2>

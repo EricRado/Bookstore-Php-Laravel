@@ -124,7 +124,7 @@
                             <a href="/addresses/{{ Auth::user()->id}}">Manage Shipping Address</a>
                         </li>
                         <li class="dropdown-item">
-                            <a href="{% url &apos;payments:orderHistory&apos; %}">Purchase History</a>
+                            <a href="/shoppingCart/orderHistory">Purchase History</a>
                         </li>
                     </ul>
                 </li>
