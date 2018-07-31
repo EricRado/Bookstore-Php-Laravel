@@ -37,10 +37,15 @@ class ShoppingCartController extends Controller
         // find total book price of the specified quantity
         $bookQuantityAddedPrice = floatval($quantity) * floatval($book->price);
         
-
         // check if book has already been added to shopping cart
-        $this->createOrderItem($book->id, $orderId, $quantity, $bookQuantityAddedPrice);
-
+        $orderItem = OrderItem::where('order_id', '=', $orderId)
+                        ->where('book_id', '=', $bookId)->first();
+        if($orderItem === null){
+            $this->createOrderItem($book->id, $orderId, $quantity, $bookQuantityAddedPrice);
+        } else {
+            $this->updateOrderItem($orderItem, $quantity, $bookQuantityAddedPrice);
+        }
+        
         // update order price, tax price , and total price
         $this->updateCartPrice($orderId, $bookQuantityAddedPrice);
 
@@ -64,8 +69,11 @@ class ShoppingCartController extends Controller
         $orderItem->save();
     }
 
-    private function updateOrderItem() {
-
+    private function updateOrderItem($orderItem, $quantity, $bookQuantityAddedPrice) {
+        $orderItem->quantity += $quantity;
+        $orderItem->book_quantity_price += $bookQuantityAddedPrice;
+        
+        $orderItem->save();
     }
 
     private function updateCartPrice($orderId, $priceToAddToCart) {
