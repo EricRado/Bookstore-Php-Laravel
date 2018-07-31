@@ -12,7 +12,11 @@ class BooksController extends Controller
 {
     public function getBooksByGenre($genre) {
         $books = Book::where('genre', '=', $genre)->paginate(15);
-        return view('books.bookResults')->with('books', $books);
+        $title = "$genre Books";
+        return view('books.bookResults')->with([
+            'books' => $books,
+            'pageTitle' => $title
+        ]);
     }
 
     public function getBookDetailsByTitle($title) {
@@ -21,13 +25,23 @@ class BooksController extends Controller
         return view('books.bookDetails')->with(['book'=>$book, 'books_by_author'=>$books_by_author]);
     }
 
-    public function getBooksByAuthor() {
-
+    public function getBooksByAuthor($id) {
+        $books = Book::where('author_id', '=', $id)->get();
+        $author = Author::find($id);
+        $title = "Books by " . $author->first_name . " " . $author->last_name;
+        return view('books.bookResults')->with([
+            'books' => $books,
+            'pageTitle' => $title
+        ]);
     }
 
     public function getTopRatedBooks() {
         $books = Book::orderBy('rating', 'desc')->take(25)->get();
-        return view('books.bookResults')->with('books', $books);
+        $title = "Top 25 Rated Books";
+        return view('books.bookResults')->with([
+            'books' => $books,
+            'pageTitle' => $title
+        ]);
     }
 
     public function getBestSellersBooks() {

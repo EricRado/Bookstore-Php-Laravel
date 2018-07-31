@@ -80,7 +80,7 @@
                 
                 <!-- If author has more than one book in the store create link to display all books by the author -->
                 @if (count($books_by_author) > 1)
-                <a href="/books/byAuthor/$book->author->id" style="color:gray;">More Books by
+            <a href="/books/byAuthor/{{$book->author->id}}" style="color:gray;">More Books by
                         {{ $book->author->first_name }} {{ $book->author->last_name }}</a>
                 @endif
 
