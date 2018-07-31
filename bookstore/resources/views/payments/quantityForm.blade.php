@@ -1,8 +1,8 @@
-{!! Form::open(['action' => ['ShoppingCartController@updateBookQuantityInShoppingCart', $book->id]]) !!}
+{!! Form::open(['action' => 'ShoppingCartController@addBookToShoppingCart']) !!}
 
     <div class="form-group">
-        {{ Form::label('quantityValue','Quantity')}}
-        {{ Form::number('quantityValue', 1, ['class' => 'form-control'])}}
+        {{ Form::label('quantity','Quantity')}}
+        {{ Form::number('quantity', 1, ['class' => 'form-control'])}}
     </div>
     {{ Form::hidden('bookId', $book->id)}}
     {{ Form::hidden('price', $book->price)}}

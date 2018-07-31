@@ -31,6 +31,6 @@ Route::resource('creditCards', 'CreditCardController');
 
 Route::resource('addresses', 'AddressController');
 
-Route::post('/shoppingCart/add/{id}', 'ShoppingCartController@updateBookQuantityInShoppingCart');
+Route::post('/shoppingCart/add', 'ShoppingCartController@addBookToShoppingCart');
 
 Route::get('/shoppingCart/show', 'ShoppingCartController@viewShoppingCart');

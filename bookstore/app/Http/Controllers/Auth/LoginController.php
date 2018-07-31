@@ -49,10 +49,10 @@ class LoginController extends Controller
             $order = Order::where('user_id', '=', auth()->user()->id)->where('payed_order', '=', 0)->get()->first();
             Session::put('orderId', $order->id);
             
-            return redirect('/'); 
+            return redirect()->back(); 
         } else{
             // Display error not able to login correctly
-            return redirect('/');
+            return redirect()->back();
         }
     }
 }
