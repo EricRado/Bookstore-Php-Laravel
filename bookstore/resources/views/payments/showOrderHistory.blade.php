@@ -6,7 +6,7 @@
 
 <h1 style="padding-bottom:30px;">Purchase History</h1>
 
-@if (count($payedOrder) > 0)
+@if (count($payedOrders) > 0)
     @foreach($payedOrders as $payedOrder)
 
     <h3>Order Id # {{ $payedOrder->id }}</h3>

@@ -39,6 +39,8 @@ Route::resource('addresses', 'AddressController');
 
 Route::post('/shoppingCart/add', 'ShoppingCartController@addOrderItemToShoppingCart');
 
+Route::delete('/shoppingCart/delete/{id}', 'ShoppingCartController@removeOrderItemFromShoppingCart');
+
 Route::get('/shoppingCart/show', 'ShoppingCartController@viewShoppingCartAndWishList');
 
 // NEEDS TO BE POST

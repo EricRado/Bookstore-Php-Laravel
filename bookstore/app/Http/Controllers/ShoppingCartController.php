@@ -80,9 +80,23 @@ class ShoppingCartController extends Controller
         }
         
         // update order price, tax price , and total price
-        $this->updateCartPrice($orderId, $bookQuantityAddedPrice);
+        $this->updateCartPrice($orderId, $bookQuantityAddedPrice, true);
 
         return redirect()->back();
+    }
+
+    public function removeOrderItemFromShoppingCart($id) {
+        $orderId = Session::get('orderId');
+
+        $orderItem = OrderItem::find($id);
+
+        // update shopping cart price
+        $this->updateCartPrice($orderId, $orderItem->book_quantity_price, false);
+
+        $this->deleteOrderItem($id);
+
+        return redirect()->back();
+
     }
 
     public function submitOrder() {
@@ -129,6 +143,11 @@ class ShoppingCartController extends Controller
         $orderItem->save();
     }
 
+    private function deleteOrderItem($id) {
+        $orderItem = OrderItem::find($id);
+        $orderItem->delete();
+    }
+
     private function updateOrderItem($orderItem, $quantity, $bookQuantityAddedPrice) {
         $orderItem->quantity += $quantity;
         $orderItem->book_quantity_price += $bookQuantityAddedPrice;
@@ -143,9 +162,13 @@ class ShoppingCartController extends Controller
         }
     }
 
-    private function updateCartPrice($orderId, $priceToAddToCart) {
+    private function updateCartPrice($orderId, $priceToAddToCart, $addItem) {
         $order = Order::find($orderId);
 
+        if(!$addItem) {
+            $priceToAddToCart = -$priceToAddToCart;
+        }
+        
         $order->price += $priceToAddToCart;
 
         $taxPriceToAddToCart = $priceToAddToCart * 0.07;

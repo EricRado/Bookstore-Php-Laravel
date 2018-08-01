@@ -41,11 +41,13 @@
                         <p style="padding:10px;"></p>
 
                         <!-- remove book from order -->
-                        <form action="{% url 'payments:deleteBook' %}" method="GET">
-                            <input type="hidden" value="{{ $orderItem->id }}" name="order_item_id">
-                            <input type="submit" class="btn btn-danger btn-sm" value="Remove">
-                            <input type="hidden" name="next" value="">
-                        </form>
+                        {!! Form::open(['action' => ['ShoppingCartController@removeOrderItemFromShoppingCart', $orderItem->id],
+                                'method' => 'POST', 'class' => 'float-right']) !!} @csrf
+                                    
+                            {{ Form::hidden('_method', 'DELETE')}}
+                            {{ Form::submit('Remove', ['class' => 'btn btn-danger'])}}
+
+                        {!! Form::close() !!}
                     </div>
                     
                     <hr>
