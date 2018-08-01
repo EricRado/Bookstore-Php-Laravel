@@ -115,11 +115,14 @@
                     <div class="col-8 col-md-8">
                         <div class="row">
                             <div class="col-md-3">
-                                <a href="/wishList/moveToShoppingCart/{{$futureOrderItem->id}}">
-                                    <button class="btn btn-sm btn-primary">Move to Shopping Cart</button>
-                                </a>
+                                
+                                {!! Form::open(['action' => ['WishListController@addFutureOrderItemToShoppingCart', $futureOrderItem->id],
+                                        'method' => 'POST', 'class' => 'float-left']) !!}
+
+                                {{ Form::submit('Move to Shopping Cart', ['class' => 'btn btn-primary'])}}
+                                {!! Form::close()!!}
                             </div>
-                            <div class="col-md-2 order-sm-2 ">
+                            <div class="col-md-2 order-md-4 ">
                                 {!! Form::open(['action' => ['WishListController@removeFutureOrderItemFromWishList', $futureOrderItem->id],
                                         'method' => 'POST', 'class' => 'float-right']) !!}
                                     @csrf

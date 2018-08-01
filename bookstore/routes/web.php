@@ -51,3 +51,5 @@ Route::get('/shoppingCart/orderHistory/{orderId}', 'ShoppingCartController@viewP
 Route::post('/wishList/add', 'WishListController@addFutureOrderItemToWishList');
 
 Route::delete('/wishList/delete/{id}', 'WishListController@removeFutureOrderItemFromWishList');
+
+Route::post('/wishList/moveToShoppingCart/{id}', 'WishListController@addFutureOrderItemToShoppingCart');
