@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\FutureOrder;
 use Session;
 
 class LoginController extends Controller
@@ -48,6 +49,10 @@ class LoginController extends Controller
             // Fetch the latest shopping cart 
             $order = Order::where('user_id', '=', auth()->user()->id)->where('payed_order', '=', 0)->get()->first();
             Session::put('orderId', $order->id);
+
+            // Fetch user's wish list
+            $futureOrder = FutureOrder::where('user_id', '=', auth()->user()->id)->first();
+            Session::put('futureOrderId', $futureOrder->id);
             
             return redirect()->back(); 
         } else{
@@ -55,4 +60,5 @@ class LoginController extends Controller
             return redirect()->back();
         }
     }
+
 }

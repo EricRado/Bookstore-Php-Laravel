@@ -43,6 +43,6 @@ class User extends Authenticatable
     }
 
     public function futureOrder() {
-        return $this->hasMany('App\Models\FutureOrder');
+        return $this->hasOne('App\Models\FutureOrder');
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Models\Order;
+use App\Models\FutureOrder;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -65,12 +67,38 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
         ]);
+
+        $this->createNewOrder($user->id);
+        $this->createFutureOrder($user->id);
+
+        // Fetch the latest shopping cart 
+        $order = Order::where('user_id', '=', $user->id)
+            ->where('payed_order', '=', 0)->get()->first();
+        Session::put('orderId', $order->id);
+
+        // Fetch user's wish list
+        $futureOrder = FutureOrder::where('user_id', '=', $user->id)->first();
+        Session::put('futureOrderId', $futureOrder->id);
+
+        return $user;
+    }
+
+    private function createNewOrder($userId) {
+        $order = new Order;
+        $order->user_id = $userId;
+        $order->save();
+    }
+
+    private function createFutureOrder($userId) {
+        $futureOrder = new FutureOrder;
+        $futureOrder->user_id = $userId;
+        $futureOrder->save();
     }
 }
