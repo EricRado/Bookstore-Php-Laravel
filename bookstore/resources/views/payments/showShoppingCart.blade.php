@@ -92,10 +92,50 @@
 @else
 <h2>Shopping Cart is Empty</h2>
 <img class="img-fluid" src="{{asset('img/cartIsEmpty.png')}}" style="margin: 0 auto; padding-top:60px;">
-    
-
-
 @endif
+
+<div class="row">
+    <div class="col-8 col-md-8">
+        @if (count($futureOrderItems) > 0)
+            <h2>Wish List</h2>
+
+            <p style="padding:10px"></p>
+            @foreach ($futureOrderItems as $futureOrderItem )
+                <div class="row">
+                    <div class="col-4 col-md-4">
+                        <img src="{% static future_order_item.book.cover_file_name %}" height="170" width="180">
+                    </div>
+                    <div class="col-3 col-md-3">
+                        <p class="fieldSizeFont">{{ $futureOrderItem->book->title }}</p>
+                        <p class="fieldSizeFont">Item # {{ $futureOrderItem->book->id }}</p>
+                    </div>
+                    <div class="col-3 col-md-3 order-sm-2">
+                        <p class="fieldSizeFont">${{ $futureOrderItem->book->price }}</p>
+                    </div>
+                    <div class="col-8 col-md-8">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <a href="/wishList/moveToShoppingCart/{{$futureOrderItem->id}}">
+                                    <button class="btn btn-sm btn-primary">Move to Shopping Cart</button>
+                                </a>
+                            </div>
+                            <div class="col-md-2 order-sm-2 ">
+                                {!! Form::open(['action' => ['WishListController@removeFutureOrderItemFromWishList', $futureOrderItem->id],
+                                        'method' => 'POST', 'class' => 'float-right']) !!}
+                                    @csrf
+                                {{ Form::hidden('_method', 'DELETE')}}
+                                {{ Form::submit('Remove', ['class' => 'btn btn-danger'])}}
+
+                                {!! Form::close() !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <hr>
+            @endforeach
+        @endif
+    </div>
+</div>
 
 <p style="padding:20px;"></p>
 

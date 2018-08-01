@@ -37,7 +37,7 @@ Route::resource('creditCards', 'CreditCardController');
 
 Route::resource('addresses', 'AddressController');
 
-Route::post('/shoppingCart/add', 'ShoppingCartController@addBookToShoppingCart');
+Route::post('/shoppingCart/add', 'ShoppingCartController@addOrderItemToShoppingCart');
 
 Route::get('/shoppingCart/show', 'ShoppingCartController@viewShoppingCartAndWishList');
 
@@ -47,3 +47,7 @@ Route::get('/shoppingCart/orderSubmitted', 'ShoppingCartController@submitOrder')
 Route::get('/shoppingCart/orderHistory', 'ShoppingCartController@viewPurchasedOrdersHistory');
 
 Route::get('/shoppingCart/orderHistory/{orderId}', 'ShoppingCartController@viewPurchasedOrderItems');
+
+Route::post('/wishList/add', 'WishListController@addFutureOrderItemToWishList');
+
+Route::delete('/wishList/delete/{id}', 'WishListController@removeFutureOrderItemFromWishList');

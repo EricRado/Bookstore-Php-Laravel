@@ -30,6 +30,16 @@
                 
                 <!-- Include book quantity form to add to shopping cart -->
                 @include('payments.quantityForm')
+
+                <p style="padding: 5px;"></p>
+                <!-- Add book to wish list -->
+                {!! Form::open(['action' => 'WishListController@addFutureOrderItemToWishList']) !!}
+
+                {{ Form::hidden('bookId', $book->id)}}
+
+                {{ Form::submit('Add to WishList', ['class' => 'btn btn-md btn-success', 'style' => 'padding:12px']) }}
+
+                {!! Form::close() !!}
             </div>
         </div>
         <hr>

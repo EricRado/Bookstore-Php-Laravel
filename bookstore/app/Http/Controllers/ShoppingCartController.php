@@ -25,7 +25,7 @@ class ShoppingCartController extends Controller
         $order = Order::find($orderId);
 
         // get all book items in wish list
-        $futureOrderItems = FutureOrderItem::where('future_order_id', '=', $futureOrderId);
+        $futureOrderItems = FutureOrderItem::where('future_order_id', '=', $futureOrderId)->get();
         
         
         return view('payments.showShoppingCart')->with([
@@ -54,7 +54,7 @@ class ShoppingCartController extends Controller
         ]);
     }
 
-    public function addBookToShoppingCart(Request $request) {
+    public function addOrderItemToShoppingCart(Request $request) {
         $bookId = $request->input('bookId');
         $quantity = $request->input('quantity');
         $orderId = Session::get('orderId');

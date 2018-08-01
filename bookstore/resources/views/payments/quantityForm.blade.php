@@ -1,4 +1,4 @@
-{!! Form::open(['action' => 'ShoppingCartController@addBookToShoppingCart']) !!}
+{!! Form::open(['action' => 'ShoppingCartController@addOrderItemToShoppingCart']) !!}
 
     <div class="form-group">
         {{ Form::label('quantity','Quantity')}}
