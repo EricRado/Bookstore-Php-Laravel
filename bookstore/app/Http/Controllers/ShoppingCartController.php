@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\OrderItem;
+use App\Models\FutureOrderItem;
 use App\Models\Order;
 use App\Models\Book;
 use Session;
@@ -12,19 +13,25 @@ use Carbon\Carbon;
 class ShoppingCartController extends Controller
 {
 
-    public function viewShoppingCart() {
+    public function viewShoppingCartAndWishList() {
         
         $orderId = Session::get('orderId');
+        $futureOrderId = Session::get('futureOrderId');
 
         // get all book items in current active shopping cart
-        $order_items = OrderItem::where('order_id', '=', $orderId)->get();
+        $orderItems = OrderItem::where('order_id', '=', $orderId)->get();
 
         // get order/shopping cart details
         $order = Order::find($orderId);
+
+        // get all book items in wish list
+        $futureOrderItems = FutureOrderItem::where('future_order_id', '=', $futureOrderId);
+        
         
         return view('payments.showShoppingCart')->with([
-            'order_items' => $order_items,
-            'order' => $order
+            'orderItems' => $orderItems,
+            'order' => $order,
+            'futureOrderItems' => $futureOrderItems,
         ]);
     }
 
@@ -32,18 +39,18 @@ class ShoppingCartController extends Controller
         $userId = auth()->user()->id;
 
         // get all orders that were purchased
-        $payed_orders = Order::where('user_id', '=', $userId)->where('payed_order', '=', true)->get();
+        $payedOrders = Order::where('user_id', '=', $userId)->where('payed_order', '=', true)->get();
 
-        return view('payments.showOrderHistory')->with('payed_orders', $payed_orders);
+        return view('payments.showOrderHistory')->with('payedOrders', $payedOrders);
     }
 
     public function viewPurchasedOrderItems($orderId) {
         // get books purchased from selected order
-        $purchased_items = OrderItem::where('order_id', '=' , $orderId)->get();
+        $purchasedItems = OrderItem::where('order_id', '=' , $orderId)->get();
 
         return view('payments.showPurchasedItems')->with([
-            'purchased_items' => $purchased_items,
-            'order_id' => $orderId
+            'purchasedItems' => $purchasedItems,
+            'orderId' => $orderId
         ]);
     }
 
@@ -88,7 +95,21 @@ class ShoppingCartController extends Controller
         $order->datetime_ordered = Carbon::now();
         $order->save();
 
+        // update OrderItems as payed
+        $orderItems = OrderItem::where('order_id', '=', $orderId)->get();
+        $this->orderItemsPurchased($orderItems);
+
+        // create a new shopping cart for user
+        $this->createNewOrder(auth()->user()->id);
+
         return redirect()->back();
+    }
+
+    private function createNewOrder($userId) {
+        $order = new Order;
+        $order->user_id = $userId;
+        $order->save();
+        Session::put('orderId', $order->id);
     }
 
     private function bookQuantityMeetsDemand($book, $quantity):bool {
@@ -113,6 +134,13 @@ class ShoppingCartController extends Controller
         $orderItem->book_quantity_price += $bookQuantityAddedPrice;
         
         $orderItem->save();
+    }
+
+    private function orderItemsPurchased($orderItems) {
+        foreach($orderItems as $orderItem) {
+            $orderItem->item_payed = true;
+            $orderItem->save();
+        }
     }
 
     private function updateCartPrice($orderId, $priceToAddToCart) {

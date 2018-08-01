@@ -4,7 +4,7 @@
 
 @section('content')
 
-@if (count($order_items) > 0 )
+@if (count($orderItems) > 0 )
     <div class="row">
         <div class="col-8 col-md-8">
             <h2>Shopping Cart</h2>
@@ -16,33 +16,33 @@
     <p style="padding:10px"></p>
     <div class="row">
         <div class="col-8 col-md-8">
-            @foreach ($order_items as $order_item)
+            @foreach ($orderItems as $orderItem)
                 <div class="row">
                     <div class="col-4 col-md-4">
                     </div>
 
                     <div class="col-3 col-md-3">
-                        <p class="fieldSizeFont">{{ $order_item->book->title }}</p>
-                        <p class="fieldSizeFont">Item # {{ $order_item->book_id }}</p>
+                        <p class="fieldSizeFont">{{ $orderItem->book->title }}</p>
+                        <p class="fieldSizeFont">Item # {{ $orderItem->book_id }}</p>
 
                         <!-- update quantity of book order item -->
                         <form action="{% url 'payments:updateShoppingCart' %}" method="POST">
                             <div class="form-group">
                                 
                                 <label class="fieldSizeFont" for="quantityValue">Quantity </label>
-                                <input type="number" name="quantity" id="quantityValue" style="width:50px;" value="{{ $order_item->quantity }}" min="1">
-                                <input type="hidden" name="order_item_id" value="{{ $order_item->id }}">
+                                <input type="number" name="quantity" id="quantityValue" style="width:50px;" value="{{ $orderItem->quantity }}" min="1">
+                                <input type="hidden" name="order_item_id" value="{{ $orderItem->id }}">
                             </div>
                                 <button type="submit" class="btn btn-sm btn-primary">Update Cart</button>
                         </form>
                     </div>
                     <div class="col-2 col-md-2 order-sm-2">
-                        <p class="fieldSizeFont">${{ $order_item->book->price }}</p>
+                        <p class="fieldSizeFont">${{ $orderItem->book->price }}</p>
                         <p style="padding:10px;"></p>
 
                         <!-- remove book from order -->
                         <form action="{% url 'payments:deleteBook' %}" method="GET">
-                            <input type="hidden" value="{{ $order_item->id }}" name="order_item_id">
+                            <input type="hidden" value="{{ $orderItem->id }}" name="order_item_id">
                             <input type="submit" class="btn btn-danger btn-sm" value="Remove">
                             <input type="hidden" name="next" value="">
                         </form>
@@ -55,7 +55,7 @@
                             </div>
                             <div class="col-3 col-md-3"></div>
                              <div class="col-2 col-md-2 order-sm-2">
-                                <p class="fieldSizeFont">${{ $order_item->book_quantity_price }}</p>
+                                <p class="fieldSizeFont">${{ $orderItem->book_quantity_price }}</p>
                             </div>
                     </div>
                     <p style="padding:25px"></p>

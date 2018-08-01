@@ -81,12 +81,10 @@ class RegisterController extends Controller
         // Fetch the latest shopping cart 
         $order = Order::where('user_id', '=', $user->id)
             ->where('payed_order', '=', 0)->get()->first();
-        Session::put('orderId', $order->id);
-
+        
         // Fetch user's wish list
         $futureOrder = FutureOrder::where('user_id', '=', $user->id)->first();
-        Session::put('futureOrderId', $futureOrder->id);
-
+        
         return $user;
     }
 
@@ -94,11 +92,13 @@ class RegisterController extends Controller
         $order = new Order;
         $order->user_id = $userId;
         $order->save();
+        Session::put('orderId', $order->id);
     }
 
     private function createFutureOrder($userId) {
         $futureOrder = new FutureOrder;
         $futureOrder->user_id = $userId;
         $futureOrder->save();
+        Session::put('futureOrderId', $futureOrder->id);
     }
 }
