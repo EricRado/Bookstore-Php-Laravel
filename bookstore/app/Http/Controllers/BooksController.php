@@ -13,6 +13,7 @@ class BooksController extends Controller
     public function getBooksByGenre($genre) {
         $books = Book::where('genre', '=', $genre)->paginate(15);
         $title = "$genre Books";
+        
         return view('books.bookResults')->with([
             'books' => $books,
             'pageTitle' => $title
@@ -22,6 +23,7 @@ class BooksController extends Controller
     public function getBookDetailsByTitle($title) {
         $book = Book::where('title', $title)->first();
         $books_by_author = Book::where('author_id',$book->author->id)->get();
+        
         return view('books.bookDetails')->with(['book'=>$book, 'books_by_author'=>$books_by_author]);
     }
 
@@ -29,6 +31,7 @@ class BooksController extends Controller
         $books = Book::where('author_id', '=', $id)->get();
         $author = Author::find($id);
         $title = "Books by " . $author->first_name . " " . $author->last_name;
+        
         return view('books.bookResults')->with([
             'books' => $books,
             'pageTitle' => $title
@@ -38,6 +41,7 @@ class BooksController extends Controller
     public function getTopRatedBooks() {
         $books = Book::orderBy('rating', 'desc')->take(25)->get();
         $title = "Top 25 Rated Books";
+        
         return view('books.bookResults')->with([
             'books' => $books,
             'pageTitle' => $title
@@ -46,15 +50,29 @@ class BooksController extends Controller
 
     public function getBestSellersBooks() {
         $books = Book::orderBy('amount_sold', 'desc')->take(25)->get();
-        return view('books.bookResults')->with('books', $books);
+        $title = "Best Sellers";
+        
+        return view('books.bookResults')->with([
+            'books' => $books,
+            'pageTitle' => $title
+        ]);
     }
 
-    public function getBookByTitle() {
-        
+    public function searchBookByTitle(Request $request) {
+        $bookTitle = $request->input('input');
+        $books = Book::where('title', '=', $bookTitle)->
+                orWhere('title', 'like', '%' . $bookTitle .'%')->get();
+        $title = "Search Result For : " . '"' . $bookTitle . '"';
+
+        return view('books.bookResults')->with([
+            'books' => $books,
+            'pageTitle' => $title
+        ]);
     }
 
     public function getTechValleyTimes() {
         $tech_valley_times = TechValleyTime::all();
+        
         return view('books.techValleyTimesResults')->with('tech_valley_times', $tech_valley_times);
     }
 

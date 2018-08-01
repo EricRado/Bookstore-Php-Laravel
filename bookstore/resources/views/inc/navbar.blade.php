@@ -11,11 +11,12 @@
             <div class="input-group" >
                 <a class="navbar-brand ml-auto" href="#" > BRAND NAME</a>
                 <!-- Search for books form -->
-                <form class="form-inline mr-small-2" action="" method="GET">
-                        <input class="form-control input-md  mr-sm-4" type="search" name="bookSearch"
-                        placeholder="Search Book">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                    </form>
+                {!! Form::open(['action' => 'BooksController@searchBookByTitle', 'method' => 'GET', 'class' => 'form-inline mr-small-2']) !!}
+
+                {!! Form::text('input', '', ['required', 'class' => 'form-control input md mr-sm-4', 'placeholder' => 'Search for a book']) !!}
+                {!! Form::submit('Search', ['class' => 'btn btn-outline-success my-2 my-sm-0']) !!}
+
+                {!! Form::close() !!}
 
                 @if (!Auth::guest())
 

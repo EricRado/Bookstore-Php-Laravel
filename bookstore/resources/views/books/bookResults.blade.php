@@ -2,6 +2,8 @@
 
 @section('content')
 
+<h1 style="text-align:center;">{{$pageTitle}} </h1>
+
 @if(count($books) > 0 )
 
     <!-- Contains style and format for a book from a query result -->
