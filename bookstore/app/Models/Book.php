@@ -26,4 +26,8 @@ class Book extends Model
     public function techValleyTime() {
         return $hasOne('App\Models\TechValleyTime');
     }
+
+    public function review() {
+        return $hasMany('App\Models\Review');
+    }
 }
