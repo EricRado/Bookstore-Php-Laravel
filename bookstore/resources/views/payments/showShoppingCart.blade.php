@@ -25,22 +25,24 @@
                         <p class="fieldSizeFont">{{ $orderItem->book->title }}</p>
                         <p class="fieldSizeFont">Item # {{ $orderItem->book_id }}</p>
 
-                        <!-- update quantity of book order item -->
-                        <form action="{% url 'payments:updateShoppingCart' %}" method="POST">
+                        <!-- update quantity of the book in the shopping cart -->
+                        {!! Form::open(['action' => ['ShoppingCartController@updateOrderItemInShoppingCart', $orderItem->id]]) !!}
+
                             <div class="form-group">
-                                
-                                <label class="fieldSizeFont" for="quantityValue">Quantity </label>
-                                <input type="number" name="quantity" id="quantityValue" style="width:50px;" value="{{ $orderItem->quantity }}" min="1">
-                                <input type="hidden" name="order_item_id" value="{{ $orderItem->id }}">
+                                {{ Form::label('quantity','Quantity', ['class' => 'fieldSizeFont'])}}
+                                {{ Form::number('quantity', $orderItem->quantity, ['class' => 'form-control'])}}
                             </div>
-                                <button type="submit" class="btn btn-sm btn-primary">Update Cart</button>
-                        </form>
+                            {{ Form::hidden('bookId', $orderItem->book->id)}}
+
+                            {{ Form::submit('Update Cart', ['class' =>'btn btn-md btn-primary', 'style' => 'padding:12px'])}}
+
+                        {!! Form::close() !!}
                     </div>
                     <div class="col-2 col-md-2 order-sm-2">
                         <p class="fieldSizeFont">${{ $orderItem->book->price }}</p>
                         <p style="padding:10px;"></p>
 
-                        <!-- remove book from order -->
+                        <!-- remove the book from the shopping cart -->
                         {!! Form::open(['action' => ['ShoppingCartController@removeOrderItemFromShoppingCart', $orderItem->id],
                                 'method' => 'POST', 'class' => 'float-right']) !!} @csrf
                                     

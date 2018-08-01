@@ -85,6 +85,37 @@ class ShoppingCartController extends Controller
         return redirect()->back();
     }
 
+    public function updateOrderItemInShoppingCart(Request $request, $orderItemId) {
+        $orderId = Session::get('orderId');
+        $quantityInput = $request->input('quantity');
+        $bookId = $request->input('bookId');
+
+        // get Book price
+        $book = Book::find($bookId);
+
+        // get OrderItem
+        $orderItem = OrderItem::find($orderItemId);
+        
+        // keeps track how much to add to order item quantity field
+        $newQuantity = $quantityInput - $orderItem->quantity;
+
+        // keeps track how much to add to order item book_quantity_price
+        $addQuantityPrice = floatval($book->price) * floatval($newQuantity);
+       
+        $oldItemQuantityPrice = $orderItem->book_quantity_price;
+        $newItemQuantityPrice = floatval($book->price) * floatval($quantityInput);
+
+        // update OrderItem
+        $this->updateOrderItem($orderItem, $newQuantity, $addQuantityPrice);
+        
+        // update Order
+        $this->updateCartPrice($orderId, $oldItemQuantityPrice, false);
+        $this->updateCartPrice($orderId, $newItemQuantityPrice, true);
+
+        return redirect()->back();
+
+    }
+
     public function removeOrderItemFromShoppingCart($id) {
         $orderId = Session::get('orderId');
 
