@@ -113,56 +113,54 @@
             <div class="modal fade" id="modalReview" role="dialog">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        {% include 'products/bookReview.html' %}
+                        @include('books.bookReviewForm')
                     </div>
                 </div>
             </div>
 
             <p style="padding:15px;"></p>
 
-            @foreach ($reviews as $review 
+            @foreach ($reviews as $review )
             <div class="well">
                 <div class="row">
                     <h2>
                         {{ $review->header }}
-                        {% if review.user_rating >= 4.0 %}
-                            <span class="label label-success">Rating:  {{ review.user_rating }}</span>
-                        {% endif %}
-                        {% if 2.0 < review.user_rating and review.user_rating < 4.0 %}
-                            <span class="label label-warning">Rating:  {{ review.user_rating }}</span>
-                        {% endif %}
-                        {% if review.user_rating < 2.0 %}
-                            <span class="label label-danger">Rating:  {{ review.user_rating }}</span>
-                        {% endif %}
+                        @if ($review->user_rating >= 4.0 )
+                            <span class="label label-success">Rating:  {{ $review->user_rating }}</span>
+                        @elseif (2.0 < $review->user_rating and $review->user_rating < 4.0)
+                            <span class="label label-warning">Rating:  {{ $review->user_rating }}</span>
+                        @else
+                            <span class="label label-danger">Rating:  {{ $review->user_rating }}</span>
+                        @endif
                     </h2>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
                         <h4>
-                            {% if review.anonymous is True %}
+                            @if ($review->anonymous)
                                 By Anonymous
-                            {% else %}
-                                By {{review.user.nickname}}
-                            {% endif %}
+                            @else
+                                By {{$review->user->username}}
+                            @endif
                         </h4>
                     </div>
                     <div class="col-md-4">
                         <h4>
-                            on {{review.published_date}}
+                            on {{$review->published_date}}
                         </h4>
                     </div>
                 </div>
                 <div class="row">
-                    <p>{{review.review_body}}</p>
+                    <p>{{$review->body}}</p>
                 </div>
             </div>
-            {% endfor %}
+            @endforeach
 
-            {% if allowed_to_review %}
+           
                 <p style="padding:5px;"></p>
                 <a class="btn btn-lg btn-success" data-toggle="modal" data-target="#modalReview"
                     href="#">Write Review</a>
-            {% endif %}
+            
         </div>
     </div>
 

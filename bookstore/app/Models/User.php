@@ -45,4 +45,8 @@ class User extends Authenticatable
     public function futureOrder() {
         return $this->hasOne('App\Models\FutureOrder');
     }
+
+   public function review() {
+        return $this->hasMany('\App\Models\Review');
+   }
 }

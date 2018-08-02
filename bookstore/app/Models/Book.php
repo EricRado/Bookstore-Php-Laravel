@@ -24,10 +24,10 @@ class Book extends Model
     }
 
     public function techValleyTime() {
-        return $hasOne('App\Models\TechValleyTime');
+        return $this->$hasOne('App\Models\TechValleyTime');
     }
 
     public function review() {
-        return $hasMany('App\Models\Review');
+        return $this->$hasMany('App\Models\Review');
     }
 }

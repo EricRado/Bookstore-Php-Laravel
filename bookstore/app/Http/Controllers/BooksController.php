@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Author;
 use App\Models\Book;
+use App\Models\Review;
 use App\Models\TechValleyTime;
 
 class BooksController extends Controller
@@ -20,11 +21,16 @@ class BooksController extends Controller
         ]);
     }
 
-    public function getBookDetailsByTitle($title) {
+    public function getBookDetails($title) {
         $book = Book::where('title', $title)->first();
         $books_by_author = Book::where('author_id',$book->author->id)->get();
+        $reviews = Review::where('book_id', '=', $book->id)->get();
         
-        return view('books.bookDetails')->with(['book'=>$book, 'books_by_author'=>$books_by_author]);
+        return view('books.bookDetails')->with([
+            'book'=> $book, 
+            'books_by_author'=> $books_by_author,
+            'reviews' => $reviews
+        ]);
     }
 
     public function getBooksByAuthor($id) {

@@ -25,13 +25,15 @@ Route::get('/books/bestSellers', 'BooksController@getBestSellersBooks');
 
 Route::get('/books/genre/{genre}','BooksController@getBooksByGenre');
 
-Route::get('/books/details/{title}', 'BooksController@getBookDetailsByTitle');
+Route::get('/books/details/{title}', 'BooksController@getBookDetails');
 
 Route::get('/books/byAuthor/{id}', 'BooksController@getBooksByAuthor');
 
 Route::get('/books/titleSearch/', 'BooksController@searchBookByTitle');
 
 Route::get('/books/techValleyTimes', 'BooksController@getTechValleyTimes');
+
+Route::post('/reviews/submitReview/{bookId}', 'ReviewController@submitReview');
 
 Route::resource('creditCards', 'CreditCardController');
 
